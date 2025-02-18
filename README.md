@@ -1,3 +1,4 @@
+# Personalized Climate-Aware Health Navigator
 
 ![Screenshot 2025-02-18 095157](https://github.com/user-attachments/assets/474e274f-8068-4ea7-8bfb-ff32b85de57a)
 ![Screenshot 2025-02-18 095210](https://github.com/user-attachments/assets/3d87ad69-5771-4cce-8243-7b843213c162)
@@ -5,8 +6,6 @@
 ![Screenshot 2025-02-18 095309](https://github.com/user-attachments/assets/1587e7dd-8840-4a68-a92d-6f292f7c685c)
 ![Screenshot 2025-02-18 095329](https://github.com/user-attachments/assets/a4df187e-d3f0-4cf3-97c8-23e1d7e0c310)
 
-
-# Personalized Climate-Aware Health Navigator
 
 ## Overview
 The **Personalized Climate-Aware Health Navigator** is a **web-based AI-powered platform** that provides **real-time weather-based health and activity recommendations**. It integrates **climate data** with **personal health metrics** to deliver **personalized insights** using **OpenWeather API** and **Gemini AI**. The platform is designed with an **interactive dashboard** that dynamically displays **weather conditions and AI-generated health suggestions**.
