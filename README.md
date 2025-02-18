@@ -1,59 +1,58 @@
-# 
-https://github.com/user-attachments/assets/254fc328-b50a-42be-8c41-fdf0caffe182
 
+![Screenshot 2025-02-18 095157](https://github.com/user-attachments/assets/474e274f-8068-4ea7-8bfb-ff32b85de57a)
+![Screenshot 2025-02-18 095210](https://github.com/user-attachments/assets/3d87ad69-5771-4cce-8243-7b843213c162)
+![Screenshot 2025-02-18 095249](https://github.com/user-attachments/assets/4ede4050-45d2-4d39-80fc-7635384ffa6f)
+![Screenshot 2025-02-18 095309](https://github.com/user-attachments/assets/1587e7dd-8840-4a68-a92d-6f292f7c685c)
+![Screenshot 2025-02-18 095329](https://github.com/user-attachments/assets/a4df187e-d3f0-4cf3-97c8-23e1d7e0c310)
+
+
+# Personalized Climate-Aware Health Navigator
 
 ## Overview
-
-The **Personalized Climate-Aware Health Navigator** is a web-based platform designed to integrate real-time climate data with personal health metrics to provide users with personalized health recommendations/suggestions. It helps users monitor their health by processing their location-based climate data, such as temperature and weather conditions, and offering insights on how these factors may influence their well-being.
+The **Personalized Climate-Aware Health Navigator** is a **web-based AI-powered platform** that provides **real-time weather-based health and activity recommendations**. It integrates **climate data** with **personal health metrics** to deliver **personalized insights** using **OpenWeather API** and **Gemini AI**. The platform is designed with an **interactive dashboard** that dynamically displays **weather conditions and AI-generated health suggestions**.
 
 ## Features
-
-- **User Registration & Authentication**: Users can register and securely log into the platform to access services.
-- **Health Data Submission**: Users can input and update personal health metrics, such as weight, temperature, and location.
-- **Real-Time Climate Data Integration**:It integrates a weather API to fetch real-time climate data based on user location.
-- **Health Recommendations**: The system processes user health data alongside climate data to generate personalized health suggestions.
-- **Dashboard Interface**: A user-friendly dashboard allows users to easily view their health metrics and receive suggestions.
+✅ **User Health Data Submission** – Users enter **location, weight, height, and body temperature**.
+✅ **Real-Time Weather Data Integration** – Fetches live **temperature, humidity, and weather conditions** via **OpenWeather API**.
+✅ **AI-Generated Health & Activity Suggestions** – Uses **Gemini AI** to provide **personalized health advice** based on weather.
+✅ **Interactive Dashboard** – Displays **weather reports and suggestions** in a visually engaging way with **animations and icons**.
+✅ **Modern UI/UX Enhancements** – Styled with **CSS animations**, **icons**, and a **toggleable suggestions section**.
 
 ## Technologies Used
-
-- **Java**: Core backend logic and business logic implementation.
-- **JSP/Servlets**: Used for building the dynamic user interfaces and handling HTTP requests and responses.
-- **JDBC/MySQL**: Provides interaction with the MySQL database to store user and health data.
-- **Weather API Integration**: Retrieves real-time weather data to customize health recommendations based on climate.
-- **JSON Parsing**: Processes API data to extract relevant weather information.
-- **Apache Tomcat**: Used as the server to deploy the application.
-- **MVC Architecture**: Ensures separation of concerns for scalability and maintainability.
+- **Java (JSP & Servlets)** – Core backend logic and request handling.
+- **RESTful API Integration** – Fetches real-time weather updates from OpenWeather API.
+- **Gemini AI API** – Generates health and activity recommendations.
+- **HTML, CSS, JavaScript** – Enhances UI with **animations, collapsible sections, and interactive elements**.
+- **Apache Tomcat** – Web server for running the application.
+- **MVC Architecture** – Ensures clean separation of concerns.
 
 ## Project Structure
+### **Model Layer**
+- `HealthData.java` – Represents user health data.
 
-- **Model Layer**: 
-  - `User.java` and `HealthData.java`: Represent user and health data entities.
-  - DAO classes (`UserDAO.java`, `HealthDataDAO.java`): Handle database operations, including user registration and health data management.
-  
-- **Controller Layer**: 
-  - Servlets (`UserServlet.java`, `HealthDataServlet.java`): Handle client requests, process data, and interact with the model and view components.
-  
-- **Service Layer**: 
-  - `SuggestionService.java`: Processes user health and climate data to generate personalized health recommendations.
-  
-- **View Layer**: 
-  - JSP files (`index.jsp`, `login.jsp`, `register.jsp`, `dashboard.jsp`): Provides user interfaces for login, registration, and the health dashboard.
+### **DAO Layer**
+- `HealthDataDAO.java` – Handles database interactions (optional if using data persistence).
 
-## Working
+### **Controller Layer**
+- `HealthDataServlet.java` – Processes form submissions and interacts with the service layer.
 
-1. **User Registration & Login**: Users register by entering their personal details and health metrics. The platform authenticates the user and provides access to the dashboard.
-2. **Health Data Input**: Users input or update their health data, such as weight, temperature, and location.
-3. **Weather Data Fetching**: The platform uses a weather API to fetch real-time weather conditions based on the user’s location.
-4. **Personalized Suggestions**: Based on the user’s health metrics and the fetched climate data, the system provides personalized health recommendations.
-5. **Dashboard Display**: The dashboard shows users their health data and the generated recommendations in an easy-to-understand format.
+### **Service Layer**
+- `SuggestionService.java` – Fetches weather data and calls **Gemini AI** for suggestions.
+
+### **View Layer**
+- `dashboard.jsp` – Displays **weather data, AI-generated suggestions, and user input forms**.
+
+## How It Works
+1️⃣ **User Inputs Health Data** – Users enter **location, weight, height, and temperature**.
+2️⃣ **Weather API Fetches Live Data** – Retrieves **current temperature, humidity, and conditions**.
+3️⃣ **Gemini AI Generates Suggestions** – Provides **health & activity recommendations** based on weather.
+4️⃣ **Dashboard Displays Results** – Weather details & suggestions appear with **icons and animations**.
 
 ## Key Features Implemented
-
-- **Model-View-Controller (MVC) Architecture**: This ensures the platform is scalable and easy to maintain.
-- **Weather API Integration**: Fetches and parses real-time weather data using **JSON**.
-- **Personalized Health Suggestions**: Built a custom algorithm to provide personalized health recommendations based on weather data and user health metrics.
-- **Data Persistence**: Utilized **MySQL** for storing user and health data securely.
+🔹 **Weather API Integration** – Fetches and parses live weather data.
+🔹 **AI-Generated Personalized Suggestions** – Uses **Gemini AI** for recommendations.
+🔹 **Enhanced UI/UX** – Includes **icons, collapsible sections, and animations**.
+🔹 **MVC-Based Scalability** – Structured for **easy maintenance & extension**.
 
 ## Conclusion
-
-The **Personalized Climate-Aware Health Navigator** is designed to offer personalized health insights by integrating personal health metrics with real-time climate data. This project showcases skills in full-stack development, including **Java**, **JSP**, **JDBC**, **MySQL**, **API integration**, and **MVC architecture**. It is a scalable solution that can be enhanced with additional features like mobile support, notifications, and AI-driven recommendations.
+The **Personalized Climate-Aware Health Navigator** is an **AI-driven, real-time health advisory system**. It integrates **climate data with AI** to offer **dynamic, personalized insights**. The platform demonstrates **full-stack expertise**, leveraging **Java, APIs, AI, and UI enhancements**. Future improvements can include **mobile integration, push notifications, and machine learning-based enhancements**.
