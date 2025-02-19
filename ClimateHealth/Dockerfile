@@ -1,32 +1,20 @@
-# Use Maven to build the WAR file inside the container
+# Use Maven to build the WAR file
 FROM maven:3.8.8-eclipse-temurin-17 AS build
-
-# Set working directory inside the container
 WORKDIR /app
-
-# Copy only the pom.xml first to leverage Docker cache
 COPY pom.xml .
-
-# Download dependencies
 RUN mvn dependency:go-offline
-
-# Copy the entire project
 COPY . .
-
-# Build the WAR file
 RUN mvn clean package
 
 # Use Tomcat to deploy the WAR file
 FROM tomcat:10.1.18-jdk17
+WORKDIR /usr/local/tomcat/webapps/ROOT/
 
-# Copy built WAR file into Tomcat webapps directory
+# Copy WAR file
 COPY --from=build /app/target/climate-health.war /usr/local/tomcat/webapps/ROOT.war
 
-# Ensure config.properties is copied to the correct location
-COPY src/main/resources/config.properties /usr/local/tomcat/webapps/ROOT/WEB-INF/classes/config.properties
+# ✅ Ensure `config.properties` is copied correctly
+COPY --from=build /app/src/main/resources/config.properties /usr/local/tomcat/webapps/ROOT/WEB-INF/classes/config.properties
 
-# Expose port 8080 for web traffic
+# Expose Port
 EXPOSE 8080
-
-# Start Tomcat
-CMD ["catalina.sh", "run"]
