@@ -55,17 +55,26 @@
     </dependencies>
 
     <build>
-        <finalName>climate-health</finalName>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version>
-                <configuration>
-                    <source>17</source>
-                    <target>17</target>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
+    <finalName>climate-health</finalName>
+    <plugins>
+        <!-- Compiler Plugin for Java 17 -->
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>3.8.1</version>
+            <configuration>
+                <source>17</source>
+                <target>17</target>
+            </configuration>
+        </plugin>
+
+        <!-- ✅ Updated Maven WAR Plugin -->
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-war-plugin</artifactId>
+            <version>3.3.2</version>  <!-- 🔄 Change from 2.2 to 3.3.2 -->
+        </plugin>
+    </plugins>
+</build>
+
 </project>
