@@ -1,5 +1,5 @@
 # Use Tomcat 10 with JDK 17
-FROM tomcat:10.1.0-jdk21
+FROM tomcat:10.1.18-jdk21
 
 # Remove default ROOT application
 RUN rm -rf /usr/local/tomcat/webapps/ROOT
