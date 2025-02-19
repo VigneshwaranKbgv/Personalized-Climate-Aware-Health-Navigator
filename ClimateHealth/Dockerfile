@@ -4,7 +4,13 @@ FROM maven:3.8.8-eclipse-temurin-17 AS build
 # Set working directory inside the container
 WORKDIR /app
 
-# Copy project files
+# Copy only the pom.xml first to leverage Docker cache
+COPY pom.xml .
+
+# Download dependencies
+RUN mvn dependency:go-offline
+
+# Copy the entire project
 COPY . .
 
 # Build the WAR file
