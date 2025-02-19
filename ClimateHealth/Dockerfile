@@ -19,8 +19,11 @@ RUN mvn clean package
 # Use Tomcat to deploy the WAR file
 FROM tomcat:10.1.18-jdk17
 
-# Copy the generated WAR file to Tomcat's webapps directory
+# Copy built WAR file into Tomcat webapps directory
 COPY --from=build /app/target/climate-health.war /usr/local/tomcat/webapps/ROOT.war
+
+# Ensure config.properties is copied to the correct location
+COPY src/main/resources/config.properties /usr/local/tomcat/webapps/ROOT/WEB-INF/classes/config.properties
 
 # Expose port 8080 for web traffic
 EXPOSE 8080
