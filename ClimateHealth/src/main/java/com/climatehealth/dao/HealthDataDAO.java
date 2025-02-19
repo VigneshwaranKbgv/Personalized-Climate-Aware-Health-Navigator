@@ -17,7 +17,7 @@ public class HealthDataDAO {
     public HealthDataDAO() {
     	try {
             Properties props = new Properties();
-            FileInputStream fis = new FileInputStream("/etc/secrets/config.properties"); // ✅ Correct Path
+            FileInputStream fis = new FileInputStream("/etc/secrets/config.properties"); 
             props.load(fis);
             fis.close();
 

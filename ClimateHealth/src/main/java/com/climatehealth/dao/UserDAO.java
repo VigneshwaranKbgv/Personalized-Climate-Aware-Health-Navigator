@@ -3,6 +3,7 @@ package com.climatehealth.dao;
 import com.climatehealth.model.User;
 import org.mindrot.jbcrypt.BCrypt;
 
+import java.io.FileInputStream;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -17,19 +18,21 @@ public class UserDAO {
     private String dbPassword;
 
     public UserDAO() {
-        try (InputStream input = getClass().getClassLoader().getResourceAsStream("config.properties")) {
-            if (input == null) {
-                throw new RuntimeException("config.properties file not found in classpath");
-            }
+        try {
             Properties props = new Properties();
-            props.load(input);
+            FileInputStream fis = new FileInputStream("/etc/secrets/config.properties"); 
+            props.load(fis);
+            fis.close();
+
             dbUrl = props.getProperty("mysql.url");
             dbUser = props.getProperty("mysql.user");
             dbPassword = props.getProperty("mysql.password");
+
         } catch (Exception e) {
             throw new RuntimeException("Failed to load database configuration", e);
         }
     }
+
 
 
     private Connection getConnection() throws SQLException {
