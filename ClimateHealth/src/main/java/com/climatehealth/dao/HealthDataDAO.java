@@ -2,6 +2,7 @@ package com.climatehealth.dao;
 
 import com.climatehealth.model.HealthData;
 
+import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -14,12 +15,16 @@ public class HealthDataDAO {
     private String dbPassword;
 
     public HealthDataDAO() {
-        try {
+    	try {
             Properties props = new Properties();
-            props.load(getClass().getClassLoader().getResourceAsStream("config.properties"));
+            FileInputStream fis = new FileInputStream("/etc/secrets/config.properties"); // ✅ Correct Path
+            props.load(fis);
+            fis.close();
+
             dbUrl = props.getProperty("mysql.url");
             dbUser = props.getProperty("mysql.user");
             dbPassword = props.getProperty("mysql.password");
+
         } catch (Exception e) {
             throw new RuntimeException("Failed to load database configuration", e);
         }

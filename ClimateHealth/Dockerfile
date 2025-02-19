@@ -1,20 +1,26 @@
-# Use Maven to build the WAR file
+# ✅ First Stage: Build the WAR file using Maven
 FROM maven:3.8.8-eclipse-temurin-17 AS build
 WORKDIR /app
+
+# ✅ Copy the POM file and install dependencies
 COPY pom.xml .
 RUN mvn dependency:go-offline
+
+# ✅ Copy the source code
 COPY . .
+
+# ✅ Build the WAR file
 RUN mvn clean package
 
-# Use Tomcat to deploy the WAR file
+# ✅ Second Stage: Deploy in Tomcat
 FROM tomcat:10.1.18-jdk17
-WORKDIR /usr/local/tomcat/webapps/ROOT/
+WORKDIR /usr/local/tomcat
 
-# Copy WAR file
+# ✅ Copy the built WAR file
 COPY --from=build /app/target/climate-health.war /usr/local/tomcat/webapps/ROOT.war
 
-# ✅ Ensure `config.properties` is copied correctly
-COPY --from=build /app/src/main/resources/config.properties /usr/local/tomcat/webapps/ROOT/WEB-INF/classes/config.properties
-
-# Expose Port
+# ✅ Expose Port 8080 for Web Traffic
 EXPOSE 8080
+
+# ✅ Start Tomcat
+CMD ["catalina.sh", "run"]
