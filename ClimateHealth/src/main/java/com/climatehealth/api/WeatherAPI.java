@@ -7,16 +7,26 @@ import java.net.URI;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Properties;
 
 import org.json.JSONObject;
 
 public class WeatherAPI {
-    private static final String API_KEY = "API KEY"; // Replace with actual API key
-    private static final String BASE_URL = "http://api.openweathermap.org/data/2.5/weather"; // Open weather URL
+	private String apiKey;
+
+    public WeatherAPI() {
+        try {
+            Properties props = new Properties();
+            props.load(getClass().getClassLoader().getResourceAsStream("config.properties"));
+            apiKey = props.getProperty("openweather.api.key");
+        	} catch (Exception e) {
+        		throw new RuntimeException("Failed to load OpenWeather API key", e);
+        	}
+    	}
 
     public Map<String, Object> getWeather(String location) throws Exception {
-        String urlString = String.format("%s?q=%s&appid=%s&units=metric", BASE_URL, location, API_KEY);
-        System.out.println("Fetching weather data from: " + urlString); // Debugging line
+        String urlString = String.format("%s?q=%s&appid=%s&units=metric", "http://api.openweathermap.org/data/2.5/weather", location, apiKey);
+        System.out.println("Fetching weather data from: " + urlString);
 
         // Create URI
         URI uri = new URI(urlString);
@@ -46,6 +56,8 @@ public class WeatherAPI {
             response.append(line);
         }
         br.close();
+        
+        System.out.println("Weather API Response: " + response.toString());
 
         // Parse JSON response to extract needed information
         JSONObject jsonObject = new JSONObject(response.toString());

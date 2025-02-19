@@ -8,22 +8,33 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Properties;
 
 public class UserDAO {
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/DB NAME";
-    private static final String USER = "NAME";
-    private static final String PASS = "PASSWORD";
+	private String dbUrl;
+    private String dbUser;
+    private String dbPassword;
 
-    // Method to get database connection
+    public UserDAO() {
+        try {
+            Properties props = new Properties();
+            props.load(getClass().getClassLoader().getResourceAsStream("config.properties"));
+            dbUrl = props.getProperty("mysql.url");
+            dbUser = props.getProperty("mysql.user");
+            dbPassword = props.getProperty("mysql.password");
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to load database configuration", e);
+        }
+    }
+
     private Connection getConnection() throws SQLException {
         try {
-            // Register the JDBC driver
             Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
             throw new SQLException("MySQL JDBC Driver not found.", e);
         }
-        return DriverManager.getConnection(DB_URL, USER, PASS);
+        return DriverManager.getConnection(dbUrl, dbUser, dbPassword);
     }
 
     // Method to register a new user
@@ -32,7 +43,7 @@ public class UserDAO {
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setString(1, user.getUsername());
-            statement.setString(2, user.getPassword()); // Password should already be hashed
+            statement.setString(2, user.getPassword());
             statement.setString(3, user.getEmail());
             statement.executeUpdate();
         } catch (SQLException e) {

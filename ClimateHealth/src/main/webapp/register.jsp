@@ -4,53 +4,116 @@
     <title>Register</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            padding: 20px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f4f8;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+        }
+        h2 {
+            color: #333;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
             text-align: center;
         }
-        form {
-            display: inline-block;
-            background: white;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #555;
+            font-weight: 600;
         }
         input[type="text"], input[type="password"], input[type="email"] {
-            width: 200px;
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #ccc;
-            border-radius: 5px;
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+        input[type="text"]:focus, input[type="password"]:focus, input[type="email"]:focus {
+            border-color: #007bff;
+            outline: none;
         }
         input[type="submit"] {
-            padding: 10px 20px;
-            color: white;
+            width: 100%;
+            padding: 0.75rem;
             background-color: #007bff;
+            color: white;
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
+            font-size: 1rem;
             cursor: pointer;
+            transition: background-color 0.3s ease;
         }
         input[type="submit"]:hover {
             background-color: #0056b3;
         }
+        .message {
+            margin-top: 1rem;
+            padding: 0.75rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        .login-link {
+            text-align: center;
+            margin-top: 1rem;
+        }
+        .login-link a {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .login-link a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
-    <h2>User Registration</h2>
+    <div class="container">
+        <h2>User Registration</h2>
 
-    <% if (request.getParameter("error") != null) { %>
-        <p style="color:red;"><%= request.getParameter("error") %></p>
-    <% } %>
+        <% if (request.getParameter("error") != null) { %>
+            <div class="message error"><%= request.getParameter("error") %></div>
+        <% } %>
 
-    <form action="UserServlet" method="post">
-        <input type="hidden" name="action" value="register" />
-        Username: <input type="text" name="username" required /><br/>
-        Password: <input type="password" name="password" required /><br/>
-        Email: <input type="email" name="email" required /><br/>
-        <input type="submit" value="Register" />
-    </form>
+        <form action="UserServlet" method="post">
+            <input type="hidden" name="action" value="register" />
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required />
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required />
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required />
+            </div>
+            <input type="submit" value="Register" />
+        </form>
 
-    <p>Already have an account? <a href="login.jsp">Login here</a></p>
+        <div class="login-link">
+            Already have an account? <a href="login.jsp">Login here</a>
+        </div>
+    </div>
 </body>
 </html>
