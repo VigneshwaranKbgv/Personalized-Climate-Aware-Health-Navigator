@@ -19,15 +19,13 @@ public class UserDAO {
 
     public UserDAO() {
         try {
-            Properties props = new Properties();
-            FileInputStream fis = new FileInputStream("/etc/secrets/config.properties"); 
-            props.load(fis);
-            fis.close();
+            dbUrl = System.getenv("MYSQL_URL");  
+            dbUser = System.getenv("MYSQL_USER");  
+            dbPassword = System.getenv("MYSQL_PASSWORD");  
 
-            dbUrl = props.getProperty("mysql.url");
-            dbUser = props.getProperty("mysql.user");
-            dbPassword = props.getProperty("mysql.password");
-
+            if (dbUrl == null || dbUser == null || dbPassword == null) {
+                throw new RuntimeException("Missing environment variables for database connection.");
+            }
         } catch (Exception e) {
             throw new RuntimeException("Failed to load database configuration", e);
         }
