@@ -15,9 +15,11 @@ public class GeminiService {
 
     public GeminiService() {
         try {
-            Properties props = new Properties();
-            props.load(getClass().getClassLoader().getResourceAsStream("config.properties"));
-            apiKey = props.getProperty("gemini.api.key");
+            apiKey = System.getenv("GEMINI_API_KEY");
+
+            if (apiKey == null || apiKey.isEmpty()) {
+                throw new RuntimeException("Gemini API key is missing! Set GEMINI_API_KEY in environment variables.");
+            }
         } catch (Exception e) {
             throw new RuntimeException("Failed to load Gemini API key", e);
         }
